@@ -2,6 +2,11 @@
 
 - Create react app
 - Configure Tailwind css
+- Header
+- Routing for app
+- Sign in and Sign up form
+- Form validation
+
 
 ## Features
 
