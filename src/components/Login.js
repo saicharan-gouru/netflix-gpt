@@ -1,10 +1,10 @@
 import React, { useState,useRef } from 'react';
 import { signInValidator,signUpValidator } from '../utils';
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../utils/firebase';
 
 const Login = () => {
-    const [isSignInForm,seIsSignInForm] = useState(true);
+    const [isSignInForm,setIsSignInForm] = useState(true);
     const [error,setError] = useState(null)
     const email = useRef(null)
     const pwd = useRef(null)
@@ -34,6 +34,22 @@ const Login = () => {
           // ..
         });
       }
+
+      if(isSignInForm && error===null){
+        signInWithEmailAndPassword(auth, email.current.value,pwd.current.value)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setError(errorMessage)
+
+        });
+      }
     }
 
     
@@ -50,7 +66,7 @@ const Login = () => {
             <input ref={pwd} className="p-3 my-4 w-full bg-gray-800" type="password" placeholder="Password" required />
             <p className="text-red-600 font-bold text-center">{error}</p>
             <button onClick={buttonHandle} className="p-3 my-6 w-full bg-red-700 rounded-lg hover:bg-red-600">{isSignInForm ? "Sign In" : "Sign Up"}</button>
-            <p onClick={()=>seIsSignInForm(prev => !prev)} className="p-3 cursor-pointer">{isSignInForm?"New to netflix? Sign Up.":"Already registered? Sign in."}</p>
+            <p onClick={()=>{setError(null);setIsSignInForm(prev => !prev)}} className="p-3 cursor-pointer">{isSignInForm?"New to netflix? Sign Up.":"Already registered? Sign in."}</p>
         </form>
     </div>
   )
