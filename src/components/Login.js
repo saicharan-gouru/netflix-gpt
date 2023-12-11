@@ -1,5 +1,7 @@
 import React, { useState,useRef } from 'react';
 import { signInValidator,signUpValidator } from '../utils';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../utils/firebase';
 
 const Login = () => {
     const [isSignInForm,seIsSignInForm] = useState(true);
@@ -7,6 +9,7 @@ const Login = () => {
     const email = useRef(null)
     const pwd = useRef(null)
     const name = useRef(null)
+  
 
 
     const buttonHandle = () => {
@@ -14,6 +17,23 @@ const Login = () => {
       setError(signInValidator(email.current.value,pwd.current.value))
       else
       setError(signUpValidator(name.current.value,email.current.value,pwd.current.value))
+
+
+      if(!isSignInForm && error===null){
+        createUserWithEmailAndPassword(auth, email.current.value,pwd.current.value)
+        .then((userCredential) => {
+          // Signed up 
+        const user = userCredential.user;
+        console.log(user);
+        // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setError(errorMessage)
+          // ..
+        });
+      }
     }
 
     
