@@ -30,7 +30,7 @@ const Login = () => {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setError(errorMessage)
+          setError(errorCode+ " " +errorMessage)
           // ..
         });
       }
@@ -46,7 +46,7 @@ const Login = () => {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setError(errorMessage)
+          setError(errorCode+ " " +errorMessage)
 
         });
       }
