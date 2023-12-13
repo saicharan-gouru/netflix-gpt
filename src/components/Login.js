@@ -2,6 +2,8 @@ import React, { useState,useRef } from 'react';
 import { signInValidator,signUpValidator } from '../utils';
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../utils/firebase';
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
     const [isSignInForm,setIsSignInForm] = useState(true);
@@ -9,7 +11,7 @@ const Login = () => {
     const email = useRef(null)
     const pwd = useRef(null)
     const name = useRef(null)
-  
+    const navigate = useNavigate();
 
 
     const buttonHandle = () => {
@@ -23,8 +25,8 @@ const Login = () => {
         createUserWithEmailAndPassword(auth, email.current.value,pwd.current.value)
         .then((userCredential) => {
           // Signed up 
-        const user = userCredential.user;
-        console.log(user);
+        
+        navigate("/browse")
         // ...
         })
         .catch((error) => {
@@ -39,8 +41,8 @@ const Login = () => {
         signInWithEmailAndPassword(auth, email.current.value,pwd.current.value)
         .then((userCredential) => {
           // Signed in 
-          const user = userCredential.user;
-          console.log(user);
+          
+          navigate("/browse")
           // ...
         })
         .catch((error) => {
