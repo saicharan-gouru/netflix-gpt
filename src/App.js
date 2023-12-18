@@ -15,7 +15,7 @@ function App() {
   useEffect(()=>{
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch(addUser({uid:user.uid,accessToken:user.accessToken,email:user.email}))
+        dispatch(addUser({uid:user.uid,accessToken:user.accessToken,email:user.email,displayName:user.displayName}))
       } else {
         dispatch(removeUser())
       }
