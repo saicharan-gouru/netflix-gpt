@@ -25,7 +25,7 @@ const Header = () => {
         {
           user &&
           <div className="flex justify-center items-center  flex-col">
-            <button onClick={signoutHandle} className="border-2  border-red-600 bg-red-600 p-2 m-2 rounded-lg  text-white hover:bg-white hover:text-red-600">LOG OUT</button>
+            <button onClick={signoutHandle} className="border-2  border-red-600 bg-red-600 p-2 m-2 rounded-lg  text-white hover:bg-white hover:text-red-600">SIGN OUT</button>
           </div>
         }
        
