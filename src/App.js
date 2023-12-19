@@ -15,7 +15,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(()=>{
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(addUser({uid:user.uid,accessToken:user.accessToken,email:user.email,displayName:user.displayName}))
         navigate("/browse")
@@ -24,6 +24,8 @@ function App() {
         navigate("/")
       }
     });
+
+    return () => unsubscribe()
   },[dispatch,navigate])
 
   return (
