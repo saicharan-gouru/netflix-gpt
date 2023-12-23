@@ -1,0 +1,19 @@
+import React from 'react'
+import MovieCard from './MovieCard'
+
+const MovieList = ({title,movies}) => {
+  return (
+    <div className="px-5">
+        <h1 className="py-4 text-2xl font-bold">{title}</h1>
+        <div className="flex overflow-scroll overflow-y-hidden">
+        <div className="flex gap-6" >
+        {
+        movies.map(movie => <MovieCard imgURL={movie.poster_path} key={movie.id}/> )      
+        }  
+        </div> 
+        </div>
+    </div>
+  )
+}
+
+export default MovieList

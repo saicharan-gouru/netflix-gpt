@@ -8,7 +8,7 @@ const Browse = () => {
   useNowPlayingVideos();
 
   return (
-    <div>
+    <div >
        <MainContainer/>
        <SecondaryContainer/>
     </div>
