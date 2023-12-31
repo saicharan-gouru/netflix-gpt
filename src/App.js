@@ -29,7 +29,7 @@ function App() {
   },[dispatch,navigate])
 
   return (
-    <div className="App">
+    <div className="App ">
         <Header/>
         <Routes>
           <Route path="/" element={<Login/>} />
