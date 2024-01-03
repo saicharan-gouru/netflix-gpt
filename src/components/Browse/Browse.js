@@ -3,6 +3,8 @@ import MainContainer from './MainContainer'
 import SecondaryContainer from './SecondaryContainer'
 import { useNowPlayingVideos, usePopularVideos, useTopRatedVideos } from '../../hooks'
 import useUpcomingVideos from '../../hooks/useUpcomingVideos'
+import GptSearch from './GptSearch'
+import { useSelector } from 'react-redux'
 
 const Browse = () => {
 
@@ -11,10 +13,18 @@ const Browse = () => {
   useTopRatedVideos();
   useUpcomingVideos();
 
+  const showGptSearch = useSelector(store => store.gpt?.showGptSearch);
+
   return (
-    <div  >
-       <MainContainer/>
-       <SecondaryContainer/>
+    <div>
+      {
+      showGptSearch ?
+      <GptSearch/> :
+      <>
+      <MainContainer/>
+      <SecondaryContainer/>
+      </>
+      }
     </div>
   )
 }

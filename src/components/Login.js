@@ -1,5 +1,5 @@
 import React, { useState,useRef } from 'react';
-import { addUser, signInValidator,signUpValidator } from '../utils';
+import { BACKGROUND_IMAGE_URL, addUser, signInValidator,signUpValidator } from '../utils';
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
 import { useDispatch } from 'react-redux';
@@ -63,7 +63,7 @@ const Login = () => {
   return (
     <div>
         <div className="absolute">
-            <img src="https://assets.nflxext.com/ffe/siteui/vlv3/c906271d-7184-4eec-83c9-b6d4c1a068ec/728874a6-eeda-400a-9bcf-a935a1408a4f/IN-en-20231127-popsignuptwoweeks-perspective_alpha_website_large.jpg" alt="background-banner" />
+            <img src={BACKGROUND_IMAGE_URL} alt="background-banner" />
         </div>
         <form onSubmit={(e)=>e.preventDefault()} className="absolute bg-black text-white p-12 w-3/12 my-40 ml-auto mr-auto left-0 right-0 opacity-90 rounded-lg">
             <h1 className=" text-3xl py-4 font-bold">{isSignInForm ? "Sign In" : "Sign Up"}</h1>
