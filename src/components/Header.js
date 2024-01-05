@@ -2,13 +2,14 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleGptSearchView } from '../utils';
+import { SUPPORTED_LANGUAGES, changeLanguage, toggleGptSearchView } from '../utils';
 
 
 const Header = () => {
 
   const navigate = useNavigate();
   const user = useSelector(appStore => appStore.user);
+  const showGptSearch = useSelector(store => store.gpt?.showGptSearch);
   const dispatch = useDispatch();
 
 
@@ -24,6 +25,10 @@ const Header = () => {
     dispatch(toggleGptSearchView())
   }
 
+  const handleLanguageChange = (e) =>{
+    dispatch(changeLanguage(e.target.value))
+  }
+
 
 
   return (
@@ -33,7 +38,15 @@ const Header = () => {
         {
           user &&   
         <div className="flex justify-center items-center gap-8">
-          <button onClick={gptButtonClickHandle} className="bg-purple-600 text-white py-1 px-3  rounded-lg hover:opacity-75">GPT search</button>
+          <button onClick={gptButtonClickHandle} className="bg-purple-600 text-white py-1 px-3  rounded-lg hover:opacity-75">{showGptSearch ? "Home page" : "GPT search"}</button>
+          {
+          showGptSearch &&
+          <select className="py-1 px-3  bg-gray-900 text-white" onChange={handleLanguageChange}>
+            {
+            SUPPORTED_LANGUAGES.map(language => <option key={language.identifier} value={language.identifier}>{language.name}</option>)
+            }
+          </select>
+          }
           <button onClick={signoutHandle} className="  border-red-600 bg-red-600 px-3 py-1 rounded-lg  text-white hover:opacity-75">SIGN OUT</button> 
         </div>
         }
