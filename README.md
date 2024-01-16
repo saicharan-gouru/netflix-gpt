@@ -1,18 +1,25 @@
 # Netflix GPT
 
-- Create react app
-- Tailwind css config
-- Header
-- Routing for app
-- Auth page
-- Form validation
-- Firebase config
-- Signup, Login functionality
-- Redux config
+## Techstack
 
+- React.js
+- React router dom
+- Redux-toolkit
+- tmdb apis
+- Tailwind CSS
+- Github
+- Netlify
 
 ## Features
 
-- Login/signup pages
+- Authentication
+  - Signup
+  - Login
+  - Logout
 - Browse page (After authentication)
-- Netflix GPT (A search bar which gives movie suggestions)
+  - Highlighted movie title and description with trailer playing in background.
+  - Now playing movies
+  - Popular movies
+  - Toprated movies
+  - Upcoming movies
+- GPT search page (A search bar which gives movie suggestions)
