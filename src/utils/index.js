@@ -6,5 +6,6 @@ import { addNowPlaying, addMainMovieTrailer, addPopularVideos, addTopRatedVideos
 import { toggleGptSearchView } from "./slices/gptSlice";
 import { changeLanguage } from "./slices/configSlice";
 import { lang } from "./languageConstants";
+import { openai } from "./openai";
 
-export { signInValidator, signUpValidator, appStore, addUser, removeUser, API_OPTIONS, addMainMovieTrailer, addNowPlaying, addPopularVideos, addUpcomingVideos, addTopRatedVideos, toggleGptSearchView, changeLanguage, IMG_BASE_URL, BACKGROUND_IMAGE_URL, lang, SUPPORTED_LANGUAGES }
+export { signInValidator, signUpValidator, appStore, addUser, removeUser, API_OPTIONS, addMainMovieTrailer, addNowPlaying, addPopularVideos, addUpcomingVideos, addTopRatedVideos, toggleGptSearchView, changeLanguage, IMG_BASE_URL, BACKGROUND_IMAGE_URL, lang, SUPPORTED_LANGUAGES, openai }
