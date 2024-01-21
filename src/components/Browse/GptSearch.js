@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import { API_OPTIONS, BACKGROUND_IMAGE_URL, addGptSearchResult, lang, openai } from '../../utils'
 import { useDispatch, useSelector } from 'react-redux'
+import GptSearchResults from './GptSearchResults';
 
 const GptSearch = () => {
 
@@ -54,6 +55,7 @@ const GptSearch = () => {
             <button onClick={handleGptSearchClick} className="text-white p-3 m-3 rounded-lg bg-red-600 col-span-3">{lang[language].search}</button>
         </form>
     </div>
+    <GptSearchResults/>
     </div>
   )
 }
