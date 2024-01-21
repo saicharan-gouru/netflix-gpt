@@ -1,13 +1,15 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { API_OPTIONS, BACKGROUND_IMAGE_URL, addGptSearchResult, lang, openai } from '../../utils'
 import { useDispatch, useSelector } from 'react-redux'
 import GptSearchResults from './GptSearchResults';
+import { FidgetSpinner } from 'react-loader-spinner'
 
 const GptSearch = () => {
 
   const language = useSelector(store => store.config.lang);
   const gptSearchText = useRef(null);
   const dispatch = useDispatch();
+  const [loading,setLoading] = useState(false)
 
 
   const fetchMovieTMDB = async (movie) => {
@@ -19,7 +21,7 @@ const GptSearch = () => {
 
 
   const handleGptSearchClick = async() => {
-
+    setLoading(true)
     const gptSearchQuery = "Act as a movie recommendation system and suggest some movies for the query : "+gptSearchText.current.value+". Only give me names of 5 movie, comma separated like the example result given ahead. Example result: movie1, movie2, movie3, movie4, movie5";
 
     const gptResults = await openai.chat.completions.create({
@@ -39,7 +41,7 @@ const GptSearch = () => {
     const gptMoviesDetails =await Promise.all(tmdbResults)
 
     console.log(gptMoviesDetails);
-
+    setLoading(false)
     dispatch(addGptSearchResult({movieNames:gptMovies,movieDetails:gptMoviesDetails}))
     
   }
@@ -55,7 +57,18 @@ const GptSearch = () => {
             <button onClick={handleGptSearchClick} className="text-white p-3 m-3 rounded-lg bg-red-600 col-span-3">{lang[language].search}</button>
         </form>
     </div>
-    <GptSearchResults/>
+    {loading ? 
+      <div className="flex justify-center pt-8">
+          (<FidgetSpinner
+            visible={true}
+            height="200"
+            width="200"
+            ariaLabel="fidget-spinner-loading"
+            wrapperStyle={{}}
+            wrapperClass="fidget-spinner-wrapper"
+            />)
+    </div>
+    :<GptSearchResults/>}
     </div>
   )
 }
