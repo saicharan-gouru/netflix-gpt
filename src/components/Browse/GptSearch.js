@@ -1,11 +1,12 @@
 import React, { useRef } from 'react'
-import { API_OPTIONS, BACKGROUND_IMAGE_URL, lang, openai } from '../../utils'
-import { useSelector } from 'react-redux'
+import { API_OPTIONS, BACKGROUND_IMAGE_URL, addGptSearchResult, lang, openai } from '../../utils'
+import { useDispatch, useSelector } from 'react-redux'
 
 const GptSearch = () => {
 
   const language = useSelector(store => store.config.lang);
   const gptSearchText = useRef(null);
+  const dispatch = useDispatch();
 
 
   const fetchMovieTMDB = async (movie) => {
@@ -37,6 +38,9 @@ const GptSearch = () => {
     const gptMoviesDetails =await Promise.all(tmdbResults)
 
     console.log(gptMoviesDetails);
+
+    dispatch(addGptSearchResult({movieNames:gptMovies,movieDetails:gptMoviesDetails}))
+    
   }
 
   return (
