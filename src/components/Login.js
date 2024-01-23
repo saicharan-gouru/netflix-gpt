@@ -58,20 +58,30 @@ const Login = () => {
       }
     }
 
-    
+  const useTestCredentials = () => {
+    email.current.value = "test@gmail.com"
+    pwd.current.value = "Test@123"
+    buttonHandle();
+  }
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault()
+    buttonHandle();
+  }
     
   return (
     <div>
         <div className="absolute">
             <img src={BACKGROUND_IMAGE_URL} alt="background-banner" />
         </div>
-        <form onSubmit={(e)=>e.preventDefault()} className="absolute bg-black text-white p-12 w-3/12 my-40 ml-auto mr-auto left-0 right-0 opacity-90 rounded-lg">
+        <form onSubmit={onSubmitHandler} className="absolute bg-black text-white p-12 w-3/12 my-40 ml-auto mr-auto left-0 right-0 bg-opacity-90 rounded-lg">
             <h1 className=" text-3xl py-4 font-bold">{isSignInForm ? "Sign In" : "Sign Up"}</h1>
             {!isSignInForm && <input ref={name} className="p-3 my-4 w-full bg-gray-800" type="text" placeholder="Full Name" />}
             <input ref={email} className="p-3 my-4 w-full bg-gray-800" type="email" placeholder="Email Id" required />
             <input ref={pwd} className="p-3 my-4 w-full bg-gray-800" type="password" placeholder="Password" required />
             <p className="text-red-600 font-bold text-center">{error}</p>
             <button onClick={buttonHandle} className="p-3 my-6 w-full bg-red-700 rounded-lg hover:bg-red-600">{isSignInForm ? "Sign In" : "Sign Up"}</button>
+            {isSignInForm ? <button onClick={useTestCredentials} className="p-3 w-full bg-purple-700 rounded-lg hover:bg-purple-600">Use Test Credentials</button> : null}
             <p onClick={()=>{setError(null);setIsSignInForm(prev => !prev)}} className="p-3 cursor-pointer">{isSignInForm?"New to netflix? Sign Up.":"Already registered? Sign in."}</p>
         </form>
     </div>
