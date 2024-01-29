@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
 import { API_OPTIONS, addMainMovieTrailer } from '../utils'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const useMainMovieTrailer = (mainMovie) => {
     const dispatch = useDispatch();
+
+    const mainMovieTrailer = useSelector(store => store.movies.mainMovieTrailer)
 
     const getMainMovieTrailer = async() => {
         const response = await fetch(`https://api.themoviedb.org/3/movie/${mainMovie.id}/videos?language=en-US`, API_OPTIONS)
@@ -14,7 +16,7 @@ const useMainMovieTrailer = (mainMovie) => {
     }
 
     useEffect(() => {
-        getMainMovieTrailer()
+        !mainMovieTrailer && getMainMovieTrailer()
     })
 }
 
