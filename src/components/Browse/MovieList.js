@@ -10,7 +10,7 @@ const MovieList = ({title,movies}) => {
         <div className="flex gap-6" >
         {
         
-        movies.map(movie => <MovieCard imgURL={movie.poster_path} key={movie.id}/> )      
+        movies.map(movie => <MovieCard movie={movie} key={movie.id}/> )      
         }  
         </div> 
         </div>
